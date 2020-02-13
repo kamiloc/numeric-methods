@@ -1,61 +1,44 @@
 # -*- coding: utf-8 -*-
 
 # ---------------------------------------------------------------------
-# Compendio de programas.
-# Matemáticas para Ingeniería. Métodos numéricos con Python.
-# Copyright (C) 2020 Los autores del texto.
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>
+# Implementación del método de bisección y algunos casos de salida;
+# Solución aproximada para f(x) entre [a,b] por el método de bisección.
+#
+# Entradas:
+# - Función f(x)
+# - [a,b] intervalo inicial
+# - N número de Iteraciones
+# - T criterio de convergencia
+#
+# Salidas:
+# c valor medio de [a,b]
 # ---------------------------------------------------------------------
 
-# Implementación del método de bisección y algunos casos de salida.
-
-from math import *
+#from math import pow, cos, sin
 
 
-def pol(x):
-    return x**3+4*x**2-10  # retorna $pol(x)=x^3+4x^2-10$
+# Defición de la función
+def f(x):
+    return x**3 + x - 1
 
 
-def trig(x):
-    return x*cos(x-1)-sin(x)  # retorna $trig(x)=x\cos(x-1)-\sin(x)$
+# Definición de la función 'bisección' por iteración
+def biseccion(a, b, tol):
+    cN, aN, bN, n = (a + b) / 2.0, a, b, 1
 
-
-def pote(x):  # retorna $pote(x)=7^x-13$
-    return pow(7, x)-13
-
-
-def bisec(f, a, b, tol, n):  # Método de bisección
-    i = 1
-    while i <= n:
-        p = a+(b-a)/2
-        print("i = {0:<2}, p={1:.16f}".format(i, p))
-        if abs(f(p)) <= 1e-15 or (b-a)/2 < tol:
-            return p
-        i += 1
-        if f(a)*f(p) > 0:
-            a = p
+    while ((bN - aN) / 2.0 > tol):
+        if (f(aN) * f(bN) >= 0): print("El método de bisección falló")
+        elif (f(cN) == 0):
+            print("La solución exacta fue encontrada {0:.3f}".format(cN))
+        elif (f(aN) * f(cN) < 0):
+            bN = cN
         else:
-            b = p
-    print("Iteraciones agotadas: Error!")
-    return
+            aN = cN
 
-# $pol(x)$, $a = 1$, $b = 2$, $Tol = 10^{-8}$, $N_0 = 100$
-print("\n"+r"-- Bisecci\'on funci\'on pol(x):"+"\n")
-bisec(pol, 1, 2, 1e-8, 100)
+        cN = (aN + bN) / 2.0
+        print("n={0:.3f} cN={1:.3f} f(cN)={2:.3f}".format(n, cN, f(cN)))
 
-# $trig(x)$, $a = 4$, $b = 6$, $Tol = 10^{-8}$, $N_0 = 100$
-print("\n"+r"-- Bisecci\'on funci\'on trig(x):"+"\n")
-bisec(trig, 4, 6, 1e-8, 100)
+    return cN
 
-# $pote(x)$, $a = 0$, $b = 2$, $Tol = 10^{-8}$, $N_0 = 100$
-print("\n"+r"-- Bisecci\'on funci\'on pote(x):"+"\n")
-bisec(pote, 0, 2, 1e-8, 100)
+
+print("La solución es: {0:.3f}".format(biseccion(0, 1, 1e-3)))
