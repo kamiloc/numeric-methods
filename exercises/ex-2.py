@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # ---------------------------------------------------------------------
-# Taller # 1: Taller Newton-Raphson
+# Taller # 2: Taller Newton-Raphson
 # Métodos númericos
 # Autor: Cristian Camilo Barreto, Juan David Vanegas
 # ---------------------------------------------------------------------
