@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# Implementación del método de Gauss Seidel
+
 from pprint import pprint
 
 
