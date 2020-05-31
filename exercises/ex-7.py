@@ -21,7 +21,7 @@ def eulerMethod(a, b, y0, f, N):
 
 
 print("Metodo de Euler")
-eulerMethod(2, 5, 0, f, 10)
+eulerMethod(2, 4, 0, f, 10)
 
 
 def RK4(a, b, y0, f, N):
@@ -40,4 +40,4 @@ def RK4(a, b, y0, f, N):
 
 
 print("Metodo de RK4:")
-RK4(2, 5, 0, f, 10)
+RK4(2, 4, 0, f, 10)
